@@ -44,12 +44,14 @@ class SeatBookingApp {
         // populate container with existing sectors
         sectors.forEach((sector) => {
             const listElement = document.createElement('li');
-            const name = document.createElement('span')
-            name.textContent = sector.sector;
+            // Fix D1: use <label> instead of <span> and fix ID (was `price-${sector}` = "price-[object Object]")
+            const label = document.createElement('label')
+            label.setAttribute('for', `price-${sector.sector}`)
+            label.textContent = sector.sector;
             const price = document.createElement('input')
-            price.setAttribute('id', `price-${sector}`)
+            price.setAttribute('id', `price-${sector.sector}`)
             price.value = sector.priceMultiplier
-            listElement.appendChild(name);
+            listElement.appendChild(label);
             listElement.appendChild(price);
             container.appendChild(listElement);
         })
