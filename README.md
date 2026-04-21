@@ -1,6 +1,9 @@
 **This project has not been finished yet**
 
 # Seat-Booking App
+
+[![CI](https://github.com/jessai2026/cpt304-seat-booking/actions/workflows/ci.yml/badge.svg)](https://github.com/jessai2026/cpt304-seat-booking/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/jessai2026/cpt304-seat-booking/branch/main/graph/badge.svg)](https://codecov.io/gh/jessai2026/cpt304-seat-booking)
 This is a project of a Seat Booking App implemented using vanilla `JavaScript`. It can be easily adjusted to be used in any project that needs to have a simple **seat-reservation system**. Please note that this project is not finished yet.
 
 The app uses `ES6` classes and methods, and also uses modern browser APIs such as `querySelector`, `createElement`, and `localStorage`. It also uses the `crypto` API to generate random ids for services and sectors.
