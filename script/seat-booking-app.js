@@ -313,50 +313,55 @@ class Sector {
         this._priceMultiplier = priceMultiplier;
     }
     renderSector() {
-        // get main app container
-        const appContainer = document.querySelector(`#seat-booking-app`);
-        // if there is no container, throw error
-        if(!appContainer) throw Error(`App container not found`);
-        
-        // get seats container
-        const seatsContainer = document.querySelector(`#seats`);
-        // if there is no container, throw error
-        if(!seatsContainer) throw Error(`Seats container not found`);
-        // get sector's id
-        const sectorId = this._id;
-        // get sector's name (without the `s-` prefix)
-        const sectorName = sectorId.slice(2);
-        // get `seats` array
-        const seats = this._seats;
+    // get main app container
+    const appContainer = document.querySelector(`#seat-booking-app`);
+    // if there is no container, throw error
+    if(!appContainer) throw Error(`App container not found`);
+    
+    // get seats container
+    const seatsContainer = document.querySelector(`#seats`);
+    // if there is no container, throw error
+    if(!seatsContainer) throw Error(`Seats container not found`);
+    // get sector's id
+    const sectorId = this._id;
+    // get sector's name (without the `s-` prefix)
+    const sectorName = sectorId.slice(2);
+    // get `seats` array
+    const seats = this._seats;
 
-        // create sector container
-        const sectorElement = document.createElement('div');
-        sectorElement.classList.add(`sector`);
-        sectorElement.setAttribute(`id`, sectorId);
-        sectorElement.style.gridArea = sectorName;
-        // append sector to the seats container
-        seatsContainer.appendChild(sectorElement);
+    // create sector container
+    const sectorElement = document.createElement('div');
+    sectorElement.classList.add(`sector`);
+    sectorElement.setAttribute(`id`, sectorId);
+    sectorElement.style.gridArea = sectorName;
+    // append sector to the seats container
+    seatsContainer.appendChild(sectorElement);
 
-        for(let i = 0; i < this._rows; i++) {
-            // create row container
-            const rowElement = document.createElement('div');
-            rowElement.classList.add(`row`);
-            rowElement.setAttribute(`id`, `${sectorId}-${i + 1}`);
-            // append row to sector container
-            sectorElement.appendChild(rowElement);
+    for(let i = 0; i < this._rows; i++) {
+        // create row container
+        const rowElement = document.createElement('div');
+        rowElement.classList.add(`row`);
+        rowElement.setAttribute(`id`, `${sectorId}-${i + 1}`);
+        // append row to sector container
+        sectorElement.appendChild(rowElement);
 
-            for(let j = 0; j < seats.length; j++) {
-                // check if seat belongs to current row
-                if (seats[j].row === `${sectorId}-${i + 1}`) {
-                    // create seat element
-                    const seatElement = document.createElement('div');
-                    seatElement.classList.add(`seat`);
-                    seatElement.setAttribute(`id`, seats[j].seat);
-                    // append seat to current row container
-                    rowElement.appendChild(seatElement);
-                };
+        for(let j = 0; j < seats.length; j++) {
+            // check if seat belongs to current row
+            if (seats[j].row === `${sectorId}-${i + 1}`) {
+                // create seat element
+                const seatElement = document.createElement('div');
+                seatElement.classList.add(`seat`);
+                seatElement.setAttribute(`id`, seats[j].seat);
+                // Fix D4: add ARIA role and label (WCAG 4.1.2 / 1.3.1)
+                seatElement.setAttribute(`role`, `button`);
+                seatElement.setAttribute(`aria-label`, `Seat ${seats[j].seat}`);
+                seatElement.setAttribute(`tabindex`, `0`);
+                // append seat to current row container
+                rowElement.appendChild(seatElement);
             };
         };
+    };
+}
 
         //create sector label
         const sectorLabel = document.createElement('span');
@@ -474,6 +479,13 @@ seatElements.forEach((seat) => {
             }
 
         };
+    });
+    // Fix D4: keyboard support – Enter / Space activates the seat (WCAG 2.1.1)
+    seat.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            seat.click();
+        }
     });
 });
 
