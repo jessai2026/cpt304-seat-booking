@@ -361,7 +361,6 @@ class Sector {
             };
         };
     };
-}
 
         //create sector label
         const sectorLabel = document.createElement('span');
