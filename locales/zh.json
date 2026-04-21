@@ -1,0 +1,15 @@
+{
+  "select_service": "选择服务：",
+  "movie_title": "电影名称：",
+  "price_base": "基础票价：",
+  "add_new": "新增",
+  "save_changes": "保存修改",
+  "delete": "删除",
+  "edit_sector_prices": "编辑区域价格",
+  "price_multipliers": "各区域价格倍率：",
+  "save": "保存",
+  "tickets": "已选座位：",
+  "buy": "购买",
+  "screen": "荧幕",
+  "lang_toggle": "English"
+}

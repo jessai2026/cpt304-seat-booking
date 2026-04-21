@@ -225,4 +225,26 @@ form {
   justify-content: center;
   align-items: center;
   box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.4);
-}/*# sourceMappingURL=style.css.map */
+}
+
+/* Baseline 4: Language toggle bar */
+#lang-bar {
+  position: fixed;
+  top: 0.6rem;
+  right: 1rem;
+  z-index: 100;
+}
+
+#lang-toggle {
+  font-size: 0.85rem;
+  padding: 0.3rem 0.8rem;
+  background-color: #d1c2d1;
+  border: 1px solid #999;
+  cursor: pointer;
+  border-radius: 0.3rem;
+}
+
+#lang-toggle:hover {
+  background-color: #b8a8b8;
+}
+/*# sourceMappingURL=style.css.map */
