@@ -1,0 +1,15 @@
+{
+  "select_service": "Select service:",
+  "movie_title": "Movie title:",
+  "price_base": "Price base:",
+  "add_new": "Add new",
+  "save_changes": "Save changes",
+  "delete": "Delete",
+  "edit_sector_prices": "Edit sectors' prices",
+  "price_multipliers": "Price multipliers for each sector:",
+  "save": "Save",
+  "tickets": "Tickets:",
+  "buy": "Buy",
+  "screen": "Screen",
+  "lang_toggle": "中文"
+}
