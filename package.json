@@ -11,6 +11,7 @@
     "collectCoverageFrom": [
       "script/models.js"
     ],
+    "coverageReporters": ["text", "lcov"],
     "coverageThreshold": {
       "global": {
         "lines": 80,
