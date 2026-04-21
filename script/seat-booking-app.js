@@ -480,6 +480,13 @@ seatElements.forEach((seat) => {
 
         };
     });
+    // Fix D4: keyboard support – Enter / Space activates the seat (WCAG 2.1.1)
+    seat.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            seat.click();
+        }
+    });
 });
 
 // get `current service` dropdown element
