@@ -427,6 +427,22 @@ function renderBookedSeats() {
     }
 };
 
+function clearSelection() {
+    // remove visual selection from all seats
+    const allSeats = document.querySelectorAll('.seat');
+    allSeats.forEach((seat) => {
+        seat.classList.remove('seat--reserved');
+    });
+    // clear current service's reserved seats array
+    const currentService = showingRoom1.getCurrentService();
+    if (currentService) {
+        currentService.clearReservedSeats();
+    }
+    // clear order details and total price
+    document.querySelector('#order-details').innerHTML = '';
+    document.querySelector('#order-total-price').innerHTML = '';
+}
+
 // INITIALIZE APP -------------------------------------------------------------
 const showingRoom1 = initializeApp(`showingRoom1`);
 // add sectors
@@ -475,6 +491,7 @@ seatElements.forEach((seat) => {
             } else {
                 // remove seat ID from array
                 currentService.removeReservedSeat(e.target.id);
+                showingRoom1.updateOrderDetails();
             }
 
         };
@@ -491,6 +508,7 @@ seatElements.forEach((seat) => {
 // get `current service` dropdown element
 const dropdownElement = document.querySelector(`#services-list`);
 dropdownElement.addEventListener('change', (e) => {
+    clearSelection();
     // update current service ID
     showingRoom1.setCurrentServiceId(e.target.value);
 
@@ -510,10 +528,12 @@ serviceAddBtn.addEventListener('click', (e) => {
     // create new Service instance
     const newService = new Service(inputServiceName, inputServicePrice)
 
+    clearSelection();
     showingRoom1.addService(newService);
     showingRoom1.cacheServices();
     showingRoom1.renderServicesList();
     showingRoom1.renderCurrentServiceData();
+    renderBookedSeats(); 
 
     console.log(`"${inputServiceName}" has been successfully added`)
     localStorageSpace();
@@ -530,7 +550,9 @@ serviceUpdateBtn.addEventListener('click', () => {
     currentService.setName(inputServiceName);
     currentService.setPrice(inputServicePrice);
 
+    clearSelection();
     showingRoom1.cacheServices();
+    showingRoom1.renderServicesList();
     showingRoom1.renderCurrentServiceData();
 
     console.log(`"${inputServiceName}" has been successfully updated`)
@@ -553,9 +575,11 @@ serviceDeleteBtn.addEventListener('click', () => {
     // remove current service from array
     servicesArray.splice(indexToDelete, 1)
 
+    clearSelection();
     showingRoom1.cacheServices();
     showingRoom1.renderServicesList()
     showingRoom1.renderCurrentServiceData();
+    renderBookedSeats(); 
 
     console.log(`"${inputServiceName}" has been successfully removed`)
     localStorageSpace();
